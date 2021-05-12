@@ -21,6 +21,4 @@ void sub(stack_t **stack, unsigned int line_number)
 	sub = tmp->next->n - tmp->n;
 	tmp->next->n = sub;
 	pop(stack, line_number);
-
-	var.stack_len--;
 }
