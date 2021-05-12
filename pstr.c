@@ -9,19 +9,21 @@
  */
 void pstr(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp = *stack;
-	unsigned int counter = 0;
+	stack_t *temp;
+	int ch;
 
-	while (counter < line_number)
+	(void)line_number;
+
+	temp = *stack;
+	while (temp != NULL)
 	{
-		if (tmp->n == 0 || (!isalnum(tmp->n)))
-		{
+		ch = temp->n;
+		if (!isascii(ch) || ch == 0)
 			break;
-		}
-	printf("%c", tmp->n);
-	tmp = tmp->next;
-	counter++;
+		putchar(ch);
+		temp = temp->next;
+		if (temp == *stack)
+			break;
 	}
-	printf("\n");
-
+	putchar('\n');
 }
