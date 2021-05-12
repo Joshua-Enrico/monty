@@ -9,7 +9,21 @@
 #include <unistd.h>
 #define UNUSED(x) (void)(x)
 
+/**
+ * struct var_s - struct to contain the main variables of the Monty interpreter
+ * @queue: flag to determine if in stack vs queue mode
+ * @stack_len: length of the stack
+ */
+typedef struct var_s
+{
+	int queue;
+	size_t stack_len;
+} var_t;
 
+#define STACK 0
+#define QUEUE 1
+/* global struct to hold flag for queue and stack length */
+extern var_t var;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -41,29 +55,22 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/**
- * 
- * 
- * 
- * 
- */
-typedef struct opcodes_list_s
-{
-    /* data */
-    char *opcode;
-    void (*f)(stack_t **stack, unsigned int line_number);
-}opcodes_list_t;
+
 
 
 
 /* prototypes needed*/
 
-/* related tu compare and match */
+/* related to compare and match */
 void check_if_op_match(char *op, stack_t **stack, unsigned int line_number);
 
 /* op functions*/
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+
+
+/* related to add nodes*/
 stack_t *add_node(stack_t **stack, const int n);
 
 

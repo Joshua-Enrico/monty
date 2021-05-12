@@ -10,9 +10,10 @@
 void check_if_op_match(char *op, stack_t **stack,unsigned int line_number)
 {
     size_t i;
-    opcodes_list_t valid_ops[] = {
+    instruction_t valid_ops[] = {
         {"push", push},
         {"pall", pall},
+        {"pint", pint},
         {NULL, NULL}
     };
 
@@ -29,10 +30,3 @@ void check_if_op_match(char *op, stack_t **stack,unsigned int line_number)
     
 }
 
-void pall(stack_t **stack, unsigned int line_number)
-{
-    UNUSED(stack);
-    UNUSED(line_number);
-    dprintf(STDOUT_FILENO, "Still working on funciont\n");
-    return;
-}
