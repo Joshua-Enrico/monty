@@ -14,12 +14,12 @@ void div_m(stack_t **stack, unsigned int line_number)
 
 	if (var.stack_len < 2)
 	{
-		dprintf(STDOUT_FILENO, "L%u: can't sub, stack too short\n", line_number);
+		dprintf(STDERR_FILENO, "L%u: can't sub, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	if (tmp->n == 0)
 	{
-		dprintf(STDOUT_FILENO, "L%u: division by zero\n", line_number);
+		dprintf(STDERR_FILENO, "L%u: division by zero\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	tmp = *stack;

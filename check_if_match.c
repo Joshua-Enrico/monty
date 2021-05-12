@@ -40,7 +40,7 @@ void check_if_op_match(char *op, stack_t **stack, unsigned int line_number)
 			return;
 		}
 	}
-	dprintf(STDOUT_FILENO, "Line %u: Unknown instrucion %s\n", line_number, op);
+	dprintf(STDERR_FILENO, "Line %u: Unknown instrucion %s\n", line_number, op);
 	exit(EXIT_FAILURE);
 
 }

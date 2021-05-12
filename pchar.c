@@ -13,12 +13,12 @@ void pchar(stack_t **stack, unsigned int line_number)
 
 	if (var.stack_len == 0)
 	{
-		dprintf(STDOUT_FILENO, "L%u: can't pchar, stack empty\n", line_number);
+		dprintf(STDERR_FILENO, "L%u: can't pchar, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	if (!isascii(tmp->n))
 	{
-		dprintf(STDOUT_FILENO,
+		dprintf(STDERR_FILENO,
 				"L%u: can't pchar, value out of range\n",
 				line_number);
 		exit(EXIT_FAILURE);
