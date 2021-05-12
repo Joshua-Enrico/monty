@@ -30,5 +30,5 @@ stack_t *add_node(stack_t **stack, const int n)
 	}
 	if (var.queue == STACK || var.stack_len == 0)
 		*stack = new;
-	return (new);
+	return (*stack);
 }
