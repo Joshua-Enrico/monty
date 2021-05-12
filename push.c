@@ -1,6 +1,12 @@
 #include "monty.h"
 #include <ctype.h>
 
+/**
+ * check_for_digit - print value on top of `stack', or exit if stack is empty
+ * @arg: double pointer to head of stack
+ *
+ * Return: void
+ */
 static int check_for_digit(char *arg)
 {
     int i;
@@ -13,7 +19,13 @@ static int check_for_digit(char *arg)
     }
     return (0);
 }
-
+/**
+ * m_pint - print value on top of `stack', or exit if stack is empty
+ * @stack: double pointer to head of stack
+ * @line_number: line number of current operation
+ *
+ * Return: void
+ */
 void push(stack_t **stack, unsigned int line_number)
 {
     char *arg;
@@ -31,6 +43,5 @@ void push(stack_t **stack, unsigned int line_number)
         exit(EXIT_FAILURE);
     }
     var.stack_len++;
-    printf("%lu", var.stack_len);
 }
 
