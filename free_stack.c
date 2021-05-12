@@ -10,7 +10,7 @@
 void free_stack(int status, void *arg)
 {
 	stack_t **stack;
-	stack_t **next;
+	stack_t *next;
 
 	UNUSED(status);
 
