@@ -9,10 +9,10 @@
  */
 void close_File(int status, void *arg)
 {
-	FILE *file;
+	FILE *fs;
 
 	UNUSED(status);
 
-	file = (FILE *)arg;
-	fclose(file);
+	fs = (FILE *) arg;
+	fclose(fs);
 }
