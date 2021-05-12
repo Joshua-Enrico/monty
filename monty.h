@@ -86,6 +86,9 @@ void queue(stack_t **stack, unsigned int line_number);
 
 /*functions to close processes on exit*/
 void free_lineptr(int status, void *arg);
+void free_stack(int status, void *arg);
+void close_File(int status, void *arg);
+
 
 
 /* related to add nodes*/

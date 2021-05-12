@@ -16,7 +16,6 @@ int main(int argc, char *argv[])
 	size_t n = 0;
 	/* var to get lines numbers */
 	unsigned int line_number = 0;
-
 	/* declarin stack that  will be used*/
 	stack_t *stack = NULL;
 
@@ -36,10 +35,9 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	/*here we need to end and close some processes on exit */
-	on_exit();
-	on_exit();
-	on_exit();
-
+	on_exit(free_lineptr, &lineptr);
+	on_exit(free_stack, &stack);
+	on_exit(close_File, &lineptr);
 	/* here we fork and passes arguments to match a op*/
 	while (getline(&lineptr, &n, file) != -1)
 	{

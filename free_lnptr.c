@@ -11,7 +11,7 @@ void free_lineptr(int status, void *arg)
 {
 	char **lineptr = arg;
 
-	(void)status;
+	UNUSED(status);
 	if (*lineptr != NULL)
 		free(*lineptr);
 }
