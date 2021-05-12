@@ -1,7 +1,7 @@
 #include "monty.h"
 #include <ctype.h>
 /**
- * pop - print value on top of `stack', or exit if stack is empty
+ * rotr - The last element of the stack becomes the top element of the stack
  * @stack: double pointer to head of stack
  * @line_number: line number of current operation
  *
@@ -9,11 +9,12 @@
  */
 void rotr(stack_t **stack, unsigned int line_number)
 {
-    stack_t *tmp = *stack;
-    UNUSED(line_number);
+	stack_t *tmp = *stack;
 
-    if (*stack)
-    {
-        *stack = tmp->prev;
-    }
+	UNUSED(line_number);
+
+	if (*stack)
+	{
+		*stack = tmp->prev;
+	}
 }

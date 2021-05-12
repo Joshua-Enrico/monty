@@ -1,6 +1,5 @@
 #include "monty.h"
-/* global struct to hold flag for queue and stack length */
-var_t var;
+
 
 /**
  * main - Monty bytecode interpreter
@@ -10,43 +9,47 @@ var_t var;
  */
 
 int main(int argc, char *argv[])
-{   
-    /* declaring needed variables*/
-    char *lineptr = NULL, *op = NULL;
-    FILE *file = NULL;
-    size_t n = 0;
-    /* var to get lines numbers */
-    unsigned int line_number = 0;
+{
+	/* declaring needed variables*/
+	char *lineptr = NULL, *op = NULL;
+	FILE *file = NULL;
+	size_t n = 0;
+	/* var to get lines numbers */
+	unsigned int line_number = 0;
 
-    /* declarin stack that  will be used*/
-    stack_t *stack = NULL;
-    
-    var.queue = 0;
+	/* declarin stack that  will be used*/
+	stack_t *stack = NULL;
+
+	var.queue = 0;
 	var.stack_len = 0;
 
-    if (argc != 2)
-    {
-        dprintf(STDERR_FILENO, "USAGE: monty file\n");
-        exit(EXIT_FAILURE);
-    }
-    /* Here we read the given file*/
-    file = fopen(argv[1], "r");
-    if (file == NULL)
-    {
-        dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
-        exit(EXIT_FAILURE);
-    }
-    /* here we fork and passes arguments to match a op*/
+	if (argc != 2)
+	{
+		dprintf(STDERR_FILENO, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
+	/* Here we read the given file*/
+	file = fopen(argv[1], "r");
+	if (file == NULL)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
+	}
+	/*here we need to end and close some processes on exit */
+	on_exit();
+	on_exit();
+	on_exit();
 
-    while (getline(&lineptr, &n, file) != -1)
-    {
-        line_number++;
-        op = strtok(lineptr, "\n\t\r ");
-        if (op != NULL && op[0] != '#')
-        {
-            check_if_op_match(op, &stack, line_number);
-        }
+	/* here we fork and passes arguments to match a op*/
+	while (getline(&lineptr, &n, file) != -1)
+	{
+		line_number++;
+		op = strtok(lineptr, "\n\t\r ");
+		if (op != NULL && op[0] != '#')
+		{
+			check_if_op_match(op, &stack, line_number);
+		}
 
-    }
-       exit(EXIT_SUCCESS);
+	}
+	   exit(EXIT_SUCCESS);
 }
