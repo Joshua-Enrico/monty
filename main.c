@@ -31,7 +31,6 @@ int main(int argc, char *argv[])
 	}
 	on_exit(free_lineptr, &lineptr);
 	on_exit(free_stack, &stack);
-	on_exit(close_File, fs);
 	while (getline(&lineptr, &n, fs) != -1)
 	{
 		line_number++;
