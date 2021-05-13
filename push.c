@@ -32,7 +32,7 @@ void push(stack_t **stack, unsigned int line_number)
 	char *arg;
 	int n;
 
-	arg = strtok(NULL, "\n\t\r ");
+	arg = strtok(NULL, "\n\t ");
 
 	if (arg == NULL || check_for_digit(arg))
 	{
