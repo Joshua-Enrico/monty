@@ -21,12 +21,12 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 	{
 		dprintf(STDERR_FILENO, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
 	}
 	fs = fopen(argv[1], "r");
 	if (fs == NULL)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
 	}
 	on_exit(free_lineptr, &lineptr);
 	on_exit(free_stack, &stack);
