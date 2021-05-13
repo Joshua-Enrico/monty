@@ -42,7 +42,7 @@ void push(stack_t **stack, unsigned int line_number)
 	n = atoi(arg);
 	if (!add_node(stack, n))
 	{
-		dprintf(STDERR_FILENO, "Error: malloc failed\n");
+		dprintf(STDERR_FILENO, "Error: mallsoc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	var.stack_len++;
