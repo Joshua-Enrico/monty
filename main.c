@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	fs = fopen(argv[1], "r");
 	if (fs == NULL)
 	{
-		exit(EXIT_FAILURE);
+		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
 	}
 	on_exit(free_lineptr, &lineptr);
 	on_exit(free_stack, &stack);
