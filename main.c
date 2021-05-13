@@ -1,7 +1,12 @@
 #include "monty.h"
 
 
-
+/**
+ * main - Monty bytecode interpreter
+ * @argc: numbers of arguments passed
+ * @argv: arrays of argument
+ * Return: EXIT_SUCCESS on success or EXIT_FAILURE on failure
+ */
 
 int main(int argc, char *argv[])
 {
