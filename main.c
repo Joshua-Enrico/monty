@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 	{
 		dprintf(STDERR_FILENO, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
 	}
 	fs = fopen(argv[1], "r");
 	if (fs == NULL)
