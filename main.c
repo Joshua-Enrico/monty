@@ -41,5 +41,5 @@ int main(int argc, char *argv[])
 			check_if_op_match(op, &stack, line_number);
 		}
 	}
-	return(0);
+	exit(EXIT_SUCCESS);
 }
