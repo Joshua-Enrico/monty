@@ -1,16 +1,20 @@
 #include "monty.h"
-
+#include <ctype.h>
 /**
- * rotr - rotates the stack to the bottom.
- * @stack: double pointer to the begining of the linked list
- * @line_number: script line number
+ * rotr - The last element of the stack becomes the top element of the stack
+ * @stack: double pointer to head of stack
+ * @line_number: line number of current operation
  *
  * Return: void
  */
 void rotr(stack_t **stack, unsigned int line_number)
 {
-	(void)line_number;
+	stack_t *tmp = *stack;
+
+	UNUSED(line_number);
 
 	if (*stack)
-		*stack = (*stack)->prev;
+	{
+		*stack = tmp->prev;
+	}
 }

@@ -1,18 +1,17 @@
-  
 #include "monty.h"
 
 /**
- * m_fs_close - close file stream
- * @status: status passed to exit
- * @arg: pointer to file stream
+ * close_File - clse "file" on exit
+ * @status: exit status
+ * @arg: pointer to line
  *
  * Return: void
  */
-void m_fs_close(int status, void *arg)
+void close_File(int status, void *arg)
 {
 	FILE *fs;
 
-	(void)status;
+	UNUSED(status);
 
 	fs = (FILE *) arg;
 	fclose(fs);

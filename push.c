@@ -2,10 +2,10 @@
 #include <ctype.h>
 
 /**
- * check_for_digit - checks that a string only contains digits
- * @arg: string to check
+ * check_for_digit - print value on top of `stack', or exit if stack is empty
+ * @arg: double pointer to head of stack
  *
- * Return: 0 if only digits, else 1
+ * Return: void
  */
 static int check_for_digit(char *arg)
 {
@@ -20,31 +20,29 @@ static int check_for_digit(char *arg)
 	}
 	return (0);
 }
-
 /**
- * m_push - push an integer onto the stack
- * @stack: double pointer to the beginning of the stack
- * @line_number: script line number
+ * push - print value on top of `stack', or exit if stack is empty
+ * @stack: double pointer to head of stack
+ * @line_number: line number of current operation
  *
  * Return: void
  */
-void m_push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, unsigned int line_number)
 {
 	char *arg;
 	int n;
 
-	arg = strtok(NULL, "\n\t\r ");
+	arg = strtok(NULL, "\n\t ");
+
 	if (arg == NULL || check_for_digit(arg))
 	{
-		dprintf(STDOUT_FILENO,
-			"L%u: usage: push integer\n",
-			line_number);
+		dprintf(STDERR_FILENO, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	n = atoi(arg);
 	if (!add_node(stack, n))
 	{
-		dprintf(STDOUT_FILENO, "Error: malloc failed\n");
+		dprintf(STDERR_FILENO, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	var.stack_len++;

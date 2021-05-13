@@ -1,9 +1,9 @@
 #include "monty.h"
 
 /**
- * free_stack - frees the stack on exit
+ * free_stack - free stack on exit
  * @status: exit status
- * @arg: double pointer to the stack
+ * @arg: pointer to line
  *
  * Return: void
  */
@@ -12,14 +12,16 @@ void free_stack(int status, void *arg)
 	stack_t **stack;
 	stack_t *next;
 
-	(void)status;
+	UNUSED(status);
 
 	stack = (stack_t **)arg;
+
 	if (*stack)
 	{
 		(*stack)->prev->next = NULL;
 		(*stack)->prev = NULL;
 	}
+
 	while (*stack != NULL)
 	{
 		next = (*stack)->next;
