@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 	while (getline(&lineptr, &n, fs) != -1)
 	{
 		line_number++;
-		op = strtok(lineptr, " ");
+		op = strtok(lineptr, "\n\t\r ");
 		if (op != NULL && op[0] != '#')
 		{
 			check_if_op_match(op, &stack, line_number);
