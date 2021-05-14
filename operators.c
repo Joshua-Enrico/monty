@@ -14,10 +14,12 @@ void pall(stack_t **stack, unsigned int Linenumber)
 
 	UNUSED(Linenumber);
 	head = *stack;
+	/* loop to print all numbers from each node*/
 	while (head != NULL)
 	{
 		printf("%d\n", head->n);
 		head = head->next;
+		/*condition to end a circular loop*/
 		if (head == *stack)
 		{
 			return;
@@ -27,20 +29,20 @@ void pall(stack_t **stack, unsigned int Linenumber)
 }
 
 /**
- * check_for_digit - print value on top of `stack', or exit if stack is empty
- * @arg: double pointer to head of stack
+ * check_for_digit - check if digit is an integer
+ * @arguments: double pointer to head of stack
  *
  * Return: void
  */
-static int check_for_digit(char *arg)
+static int check_for_digit(char *arguments)
 {
-	int i;
+	int index;
 
-	for (i = 0; arg[i]; i++)
+	for (index = 0; arguments[index]; index++)
 	{
-		if (arg[i] == '-' && i == 0)
+		if (arguments[index] == '-' && index == 0)
 			continue;
-		if (isdigit(arg[i]) == 0)
+		if (isdigit(arguments[index]) == 0)
 			return (1);
 	}
 	return (0);
@@ -54,21 +56,19 @@ static int check_for_digit(char *arg)
  */
 void push(stack_t **stack, unsigned int Linenumber)
 {
-	char *arg;
-	int n;
+	char *arguments;
+	int number;
 
-	arg = strtok(NULL, "\n\t ");
+	arguments = strtok(NULL, "\n\t ");
 
-	if (arg == NULL || check_for_digit(arg))
+	if (arguments == NULL || check_for_digit(arguments))
 	{
-		dprintf(STDERR_FILENO, "L%u: usage: push integer\n", Linenumber);
-		exit(EXIT_FAILURE);
+		error_handler("is_not_int", Linenumber);
 	}
-	n = atoi(arg);
-	if (!add_node(stack, n))
+	number = atoi(arguments);
+	if (!add_node(stack, number))
 	{
-		dprintf(STDERR_FILENO, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+		error_handler("malloc_fails", Linenumber);
 	}
 	var.stack_len++;
 }
@@ -95,14 +95,15 @@ void nop(stack_t **stack, unsigned int Linenumber)
  */
 void add(stack_t **stack, unsigned int Linenumber)
 {
-	int n = 0;
-
+	int number = 0;
+	/*if we have less than two nodes, we can't add*/
 	if (var.stack_len < 2)
 	{
-		dprintf(STDERR_FILENO, "L%u: can't add, stack too short\n", Linenumber);
-		exit(EXIT_FAILURE);
+		error_handler("error_add", Linenumber);
 	}
-	n += (*stack)->n;
+	number += (*stack)->n;
+	/* we use pop to delete the top node and get the new one*/
 	pop(stack, Linenumber);
-	(*stack)->n += n;
+	/* here we add the new node element */
+	(*stack)->n += number;
 }

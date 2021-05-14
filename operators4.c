@@ -14,8 +14,7 @@ void mul(stack_t **stack, unsigned int Linenumber)
 
 	if (var.stack_len < 2)
 	{
-		dprintf(STDERR_FILENO, "L%u: can't mul, stack too short\n", Linenumber);
-		exit(EXIT_FAILURE);
+		error_handler("error_mul", Linenumber);
 	}
 	tmp = *stack;
 	sub = tmp->next->n * tmp->n;

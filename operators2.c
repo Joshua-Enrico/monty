@@ -10,14 +10,11 @@
  */
 void pop(stack_t **stack, unsigned int Linenumber)
 {
-	stack_t *pop = *stack;
+	stack_t *tmp = *stack;
 
 	if (var.stack_len == 0)
 	{
-		dprintf(STDERR_FILENO,
-			"L%u: can't pop an empty stack\n",
-			Linenumber);
-		exit(EXIT_FAILURE);
+		error_handler("empty_stack", Linenumber);
 	}
 	(*stack)->next->prev = (*stack)->prev;
 	(*stack)->prev->next = (*stack)->next;
@@ -25,7 +22,7 @@ void pop(stack_t **stack, unsigned int Linenumber)
 		*stack = (*stack)->next;
 	else
 		*stack = NULL;
-	free(pop);
+	free(tmp);
 	var.stack_len--;
 }
 
@@ -42,15 +39,11 @@ void pchar(stack_t **stack, unsigned int Linenumber)
 
 	if (var.stack_len == 0)
 	{
-		dprintf(STDERR_FILENO, "L%u: can't pchar, stack empty\n", Linenumber);
-		exit(EXIT_FAILURE);
+		error_handler("pchar_error", Linenumber);
 	}
 	if (!isascii(tmp->n))
 	{
-		dprintf(STDERR_FILENO,
-				"L%u: can't pchar, value out of range\n",
-				Linenumber);
-		exit(EXIT_FAILURE);
+		error_handler("isnot_assci", Linenumber);
 	}
 
 	printf("%c\n", tmp->n);
@@ -70,8 +63,7 @@ void sub(stack_t **stack, unsigned int Linenumber)
 
 	if (var.stack_len < 2)
 	{
-		dprintf(STDERR_FILENO, "L%u: can't sub, stack too short\n", Linenumber);
-		exit(EXIT_FAILURE);
+		error_handler("error_sub", Linenumber);
 	}
 	tmp = *stack;
 	sub = tmp->next->n - tmp->n;
@@ -93,8 +85,7 @@ void pint(stack_t **stack, unsigned int Linenumber)
 
 	if (var.stack_len == 0)
 	{
-		dprintf(STDERR_FILENO, "L%u: can't pint, stack empty\n", Linenumber);
-		exit(EXIT_FAILURE);
+		error_handler("error_pint", Linenumber);
 	}
 	printf("%d\n", tmp->n);
 }
@@ -113,13 +104,11 @@ void mod(stack_t **stack, unsigned int Linenumber)
 
 	if (var.stack_len < 2)
 	{
-		dprintf(STDERR_FILENO, "L%u: can't mod, stack too short\n", Linenumber);
-		exit(EXIT_FAILURE);
+		error_handler("error_mod", Linenumber);
 	}
 	if (tmp->n == 0)
 	{
-		dprintf(STDERR_FILENO, "L%u: division by zero\n", Linenumber);
-		exit(EXIT_FAILURE);
+		error_handler("error_div_by_0", Linenumber);
 	}
 	tmp = *stack;
 	sub = tmp->next->n % tmp->n;

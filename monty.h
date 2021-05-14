@@ -55,6 +55,20 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct check_valid_erros_e - structure that check valid errors
+ * @opcode: opcode error
+ * @f: function to handle the opcode
+ *
+ * Description: opcode error
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
+typedef struct check_valid_erros_e
+{
+	char *opcode;
+	void (*f)(unsigned int line_number);
+} check_valid_erros_z;
+
 /* global struct to hold flag for queue and stack length */
 var_t var;
 
@@ -94,6 +108,23 @@ void close_File(int status, void *arg);
 /* related to add nodes*/
 stack_t *add_node(stack_t **stack, const int n);
 
+/*error handlers, print cutomize messages*/
+void error_handler(char *op_or_error, unsigned int Linenumber);
+void error_handler_add(unsigned int number);
+void malloc_fails(unsigned int Linenumber);
+void error_isnot_int(unsigned int Linenumber);
+void error_empty_stack(unsigned int Linenumber);
+void error_pchar(unsigned int Linenumber);
+void isnot_assci(unsigned int Linenumber);
+void error_sub(unsigned int Linenumber);
+void error_pint(unsigned int Linenumber);
+void error_mod(unsigned int Linenumber);
+void error_div_by_0(unsigned int Linenumber);
+void wrong_arguments(unsigned int Linenumber);
+void error_fopen(char *argument);
+void error_swap(unsigned int Linenumber);
+void error_div(unsigned int Linenumber);
+void error_mul(unsigned int Linenumber);
 
 
 #endif /* _MONTY_H_ */

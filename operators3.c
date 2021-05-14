@@ -79,10 +79,7 @@ void swap(stack_t **stack, unsigned int Linenumber)
 
 	if (var.stack_len < 2)
 	{
-		dprintf(STDERR_FILENO,
-			"L%u: can't swap, stack too short\n",
-			Linenumber);
-		exit(EXIT_FAILURE);
+		error_handler("error_swap", Linenumber);
 	}
 	if (var.stack_len == 2)
 	{
@@ -112,19 +109,13 @@ void div_m(stack_t **stack, unsigned int Linenumber)
 
 	if (var.stack_len < 2)
 	{
-		dprintf(STDERR_FILENO,
-			"L%u: can't div, stack too short\n",
-			Linenumber);
-		exit(EXIT_FAILURE);
+		error_handler("error_div", Linenumber);
 	}
 	number = (*stack)->n;
 	pop(stack, Linenumber);
 	if (number == 0)
 	{
-		dprintf(STDERR_FILENO,
-			"L%u: division by zero\n",
-			Linenumber);
-		exit(EXIT_FAILURE);
+		error_handler("error_div_by_0", Linenumber);
 	}
 	(*stack)->n /= number;
 }

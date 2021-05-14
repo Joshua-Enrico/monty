@@ -21,15 +21,13 @@ int main(int argc, char *argv[])
 	/* Make sure get two arguments*/
 	if (argc != 2)
 	{
-		dprintf(STDERR_FILENO, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
+		error_handler("wrong_argu", Linemunber);
 	}
 	/*reading file*/
 	FILE = fopen(argv[1], "r");
 	if (FILE == NULL)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
+		error_fopen(argv[1]);
 	}
 	/*on_exit functions get active at program termination: Cleaner*/
 	on_exit(free_File_line, &File_line);
