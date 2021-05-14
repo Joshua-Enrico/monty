@@ -1,0 +1,130 @@
+#include "monty.h"
+#include <ctype.h>
+/**
+ * pstr - prints the string starting at the top of the stack.
+ * @stack: double pointer to head of stack
+ * @Linenumber: line number of current operation
+ *
+ * Return: void
+ */
+void pstr(stack_t **stack, unsigned int Linenumber)
+{
+	stack_t *temp;
+	int cha;
+
+	UNUSED(Linenumber);
+
+	temp = *stack;
+	while (temp != NULL)
+	{
+		cha = temp->n;
+		if (!isascii(cha) || cha == 0)
+			break;
+		putchar(cha);
+		temp = temp->next;
+		if (temp == *stack)
+			break;
+	}
+	putchar('\n');
+}
+
+/**
+ * rotl - The top element becomes the last one,the second top becomes the first
+ * @stack: double pointer to head of stack
+ * @Linenumber: line number of current operation
+ *
+ * Return: void
+ */
+void rotl(stack_t **stack, unsigned int Linenumber)
+{
+	stack_t *tmp = *stack;
+
+	UNUSED(Linenumber);
+
+	if (*stack)
+	{
+		*stack = tmp->next;
+	}
+}
+
+/**
+ * rotr - The last element of the stack becomes the top element of the stack
+ * @stack: double pointer to head of stack
+ * @Linenumber: line number of current operation
+ *
+ * Return: void
+ */
+void rotr(stack_t **stack, unsigned int Linenumber)
+{
+	stack_t *tmp = *stack;
+
+	UNUSED(Linenumber);
+
+	if (*stack)
+	{
+		*stack = tmp->prev;
+	}
+}
+
+/**
+ * swap - swaps the top two elements of the stack.
+ * @stack: double pointer to head of stack
+ * @Linenumber: line number of current operation
+ *
+ * Return: void
+ */
+void swap(stack_t **stack, unsigned int Linenumber)
+{
+	stack_t *temporal;
+
+	if (var.stack_len < 2)
+	{
+		dprintf(STDERR_FILENO,
+			"L%u: can't swap, stack too short\n",
+			Linenumber);
+		exit(EXIT_FAILURE);
+	}
+	if (var.stack_len == 2)
+	{
+		*stack = (*stack)->next;
+		return;
+	}
+	temporal = (*stack)->next;
+	temporal->prev = (*stack)->prev;
+	(*stack)->prev->next = temporal;
+	(*stack)->prev = temporal;
+	(*stack)->next = temporal->next;
+	temporal->next->prev = *stack;
+	temporal->next = *stack;
+	*stack = temporal;
+}
+
+/**
+ * div_m -  divides the second top element of the stack by the top element.
+ * @stack: double pointer to head of stack
+ * @Linenumber: line number of current operation
+ *
+ * Return: void
+ */
+void div_m(stack_t **stack, unsigned int Linenumber)
+{
+	int number;
+
+	if (var.stack_len < 2)
+	{
+		dprintf(STDERR_FILENO,
+			"L%u: can't div, stack too short\n",
+			Linenumber);
+		exit(EXIT_FAILURE);
+	}
+	number = (*stack)->n;
+	pop(stack, Linenumber);
+	if (number == 0)
+	{
+		dprintf(STDERR_FILENO,
+			"L%u: division by zero\n",
+			Linenumber);
+		exit(EXIT_FAILURE);
+	}
+	(*stack)->n /= number;
+}

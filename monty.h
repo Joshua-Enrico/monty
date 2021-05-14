@@ -22,7 +22,7 @@ typedef struct var_s
 
 #define STACK 0
 #define QUEUE 1
-/* global struct to hold flag for queue and stack length */
+/* global struct to work with queue an lentgh*/
 extern var_t var;
 
 /**
@@ -85,8 +85,8 @@ void stack_m(stack_t **stack, unsigned int line_number);
 void queue(stack_t **stack, unsigned int line_number);
 
 /*functions to close processes on exit*/
-void free_lineptr(int status, void *arg);
-void free_stack(int status, void *arg);
+void free_File_line(int status, void *arg);
+void free_stack_list(int status, void *arg);
 void close_File(int status, void *arg);
 
 

@@ -4,11 +4,11 @@
  * check_if_op_match - check if op is a valid operator
  * @op: op to check
  * @stack: double pointer to the beginnig of the stack
- * @line_number: script line number
+ * @Linenumber: script line number
  *
  * Return: void
  */
-void check_if_op_match(char *op, stack_t **stack, unsigned int line_number)
+void check_if_op_match(char *op, stack_t **stack, unsigned int Linenumber)
 {
 	size_t i;
 	instruction_t valid_ops[] = {
@@ -36,11 +36,11 @@ void check_if_op_match(char *op, stack_t **stack, unsigned int line_number)
 	{
 		if (strcmp(valid_ops[i].opcode, op) == 0)
 		{
-			valid_ops[i].f(stack, line_number);
+			valid_ops[i].f(stack, Linenumber);
 			return;
 		}
 	}
-	dprintf(STDERR_FILENO, "L%u: unknown instruction %s\n", line_number, op);
+	dprintf(STDERR_FILENO, "L%u: unknown instruction %s\n", Linenumber, op);
 	exit(EXIT_FAILURE);
 
 }
