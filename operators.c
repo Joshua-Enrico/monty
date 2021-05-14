@@ -40,11 +40,14 @@ static int check_for_digit(char *arguments)
 
 	for (index = 0; arguments[index]; index++)
 	{
+		/* here we allow negative numbers an 0*/
 		if (arguments[index] == '-' && index == 0)
 			continue;
+		/* return 1 is is digit*/
 		if (isdigit(arguments[index]) == 0)
 			return (1);
 	}
+	/* 0 if not*/
 	return (0);
 }
 /**
@@ -60,16 +63,18 @@ void push(stack_t **stack, unsigned int Linenumber)
 	int number;
 
 	arguments = strtok(NULL, "\n\t ");
-
+	/*make sure there are just int*/
 	if (arguments == NULL || check_for_digit(arguments))
 	{
 		error_handler("is_not_int", Linenumber);
 	}
+	/* we use atoi to make int variable from char*/
 	number = atoi(arguments);
 	if (!add_node(stack, number))
 	{
 		error_handler("malloc_fails", Linenumber);
 	}
+	/* here we control the numbers of nodes*/
 	var.stack_len++;
 }
 

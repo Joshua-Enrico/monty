@@ -9,6 +9,7 @@
  */
 void free_File_line(int status, void *argument)
 {
+	/* get argument*/
 	char **lineptr = argument;
 
 	UNUSED(status);
@@ -31,19 +32,20 @@ void free_stack_list(int status, void *argument)
 	UNUSED(status);
 
 	stack = (stack_t **)argument;
-
+	/*break circle*/
 	if (*stack)
 	{
 		(*stack)->prev->next = NULL;
 		(*stack)->prev = NULL;
 	}
-
+	/* now we can feree al nodes*/
 	while (*stack != NULL)
 	{
 		next = (*stack)->next;
 		free(*stack);
 		*stack = next;
 	}
+	/*make sure to set stack len in 0*/
 	var.stack_len = 0;
 }
 
@@ -56,10 +58,10 @@ void free_stack_list(int status, void *argument)
  */
 void close_File(int status, void *argument)
 {
-	FILE *fs;
+	FILE *File;
 
 	UNUSED(status);
-
-	fs = (FILE *) argument;
-	fclose(fs);
+	/* close file: it's a must procedure*/
+	File = (FILE *) argument;
+	fclose(File);
 }

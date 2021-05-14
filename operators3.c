@@ -18,10 +18,13 @@ void pstr(stack_t **stack, unsigned int Linenumber)
 	while (temp != NULL)
 	{
 		cha = temp->n;
+		/* is there is no assci we break*/
 		if (!isascii(cha) || cha == 0)
 			break;
 		putchar(cha);
 		temp = temp->next;
+		/* break loop condition*/
+		/* take in count that stack is a circle list*/
 		if (temp == *stack)
 			break;
 	}
@@ -40,7 +43,7 @@ void rotl(stack_t **stack, unsigned int Linenumber)
 	stack_t *tmp = *stack;
 
 	UNUSED(Linenumber);
-
+	/*here we just poin to the next node*/
 	if (*stack)
 	{
 		*stack = tmp->next;
@@ -59,7 +62,7 @@ void rotr(stack_t **stack, unsigned int Linenumber)
 	stack_t *tmp = *stack;
 
 	UNUSED(Linenumber);
-
+	/* we just have to point the prev node*/
 	if (*stack)
 	{
 		*stack = tmp->prev;
@@ -76,11 +79,12 @@ void rotr(stack_t **stack, unsigned int Linenumber)
 void swap(stack_t **stack, unsigned int Linenumber)
 {
 	stack_t *temporal;
-
+	/*operation avaiable only if there are more thant 2 nodes*/
 	if (var.stack_len < 2)
 	{
 		error_handler("error_swap", Linenumber);
 	}
+	/* if only two nodes we just point next*/
 	if (var.stack_len == 2)
 	{
 		*stack = (*stack)->next;
@@ -106,13 +110,15 @@ void swap(stack_t **stack, unsigned int Linenumber)
 void div_m(stack_t **stack, unsigned int Linenumber)
 {
 	int number;
-
+	/*operation avaiable only if there are more thant 2 nodes*/
 	if (var.stack_len < 2)
 	{
 		error_handler("error_div", Linenumber);
 	}
 	number = (*stack)->n;
+	/* we delete top element*/
 	pop(stack, Linenumber);
+	/* 0 not allowed*/
 	if (number == 0)
 	{
 		error_handler("error_div_by_0", Linenumber);
